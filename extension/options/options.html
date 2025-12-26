@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StashIt - Vault</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Login Screen -->
+    <div id="login-screen" class="login-container">
+      <div class="login-box">
+        <div class="logo">
+          <span class="logo-icon">🔐</span>
+          <h1>StashIt</h1>
+          <p class="tagline">Your personal secure vault</p>
+        </div>
+        <button id="google-login" class="btn-google">
+          <svg class="google-icon" viewBox="0 0 24 24" width="20" height="20">
+            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+          </svg>
+          Sign in with Google
+        </button>
+        <p class="login-note">Your data stays encrypted and only you can access it.</p>
+      </div>
+    </div>
+
+    <!-- Main App -->
+    <div id="main-app" class="main-container hidden">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <span class="logo-icon">🔐</span>
+          <span class="app-name">StashIt</span>
+          <span class="made-by">❤️ Sayed Abdul Karim</span>
+        </div>
+
+        <nav class="sidebar-nav">
+          <button class="nav-item active" data-category="all">
+            <span class="nav-icon">📦</span>
+            <span class="nav-label">All Items</span>
+            <span class="nav-count" id="count-all">0</span>
+          </button>
+          <button class="nav-item" data-category="password">
+            <span class="nav-icon">🔑</span>
+            <span class="nav-label">Passwords</span>
+            <span class="nav-count" id="count-password">0</span>
+          </button>
+          <button class="nav-item" data-category="document">
+            <span class="nav-icon">📄</span>
+            <span class="nav-label">Documents</span>
+            <span class="nav-count" id="count-document">0</span>
+          </button>
+          <button class="nav-item" data-category="payslip">
+            <span class="nav-icon">💰</span>
+            <span class="nav-label">Payslips</span>
+            <span class="nav-count" id="count-payslip">0</span>
+          </button>
+          <button class="nav-item" data-category="photo">
+            <span class="nav-icon">📷</span>
+            <span class="nav-label">Photos</span>
+            <span class="nav-count" id="count-photo">0</span>
+          </button>
+          <button class="nav-item" data-category="personal">
+            <span class="nav-icon">📁</span>
+            <span class="nav-label">Personal</span>
+            <span class="nav-count" id="count-personal">0</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-divider"></div>
+
+        <nav class="sidebar-nav">
+          <button class="nav-item" data-category="trash">
+            <span class="nav-icon">🗑️</span>
+            <span class="nav-label">Trash</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-footer">
+          <div class="user-info" id="user-info">
+            <img src="" alt="" class="user-avatar" id="user-avatar">
+            <span class="user-name" id="user-name">User</span>
+          </div>
+          <button id="logout-btn" class="btn-logout" title="Logout">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+              <polyline points="16 17 21 12 16 7"/>
+              <line x1="21" y1="12" x2="9" y2="12"/>
+            </svg>
+          </button>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="content">
+        <!-- Header -->
+        <header class="content-header">
+          <div class="header-left">
+            <h1 id="page-title">All Items</h1>
+          </div>
+          <div class="header-center">
+            <div class="search-box">
+              <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/>
+                <path d="m21 21-4.35-4.35"/>
+              </svg>
+              <input type="text" id="search-input" placeholder="Search vault...">
+              <span class="search-hint">Global search</span>
+            </div>
+          </div>
+          <div class="header-right">
+            <button id="import-btn" class="btn-secondary" title="Import Backup">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+              Import
+            </button>
+            <input type="file" id="import-file" accept=".json" style="display: none;">
+            <button id="export-btn" class="btn-secondary" title="Export Backup">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="17 8 12 3 7 8"/>
+                <line x1="12" y1="3" x2="12" y2="15"/>
+              </svg>
+              Export
+            </button>
+            <button id="add-new-btn" class="btn-primary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="5" x2="12" y2="19"/>
+                <line x1="5" y1="12" x2="19" y2="12"/>
+              </svg>
+              Add New
+            </button>
+          </div>
+        </header>
+
+        <!-- Items Grid -->
+        <div id="items-container" class="items-grid">
+          <!-- Items will be rendered here -->
+        </div>
+
+        <!-- Empty State -->
+        <div id="empty-state" class="empty-state hidden">
+          <div class="empty-icon">📦</div>
+          <h3>No items yet</h3>
+          <p>Add your first item to get started</p>
+          <button class="btn-primary" id="empty-add-btn">Add New Item</button>
+        </div>
+
+        <!-- Loading State -->
+        <div id="loading-state" class="loading-state hidden">
+          <div class="spinner"></div>
+          <p>Loading...</p>
+        </div>
+      </main>
+    </div>
+
+    <!-- Add/Edit Modal -->
+    <div id="item-modal" class="modal hidden">
+      <div class="modal-backdrop"></div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 id="modal-title">Add New Item</h2>
+          <button class="modal-close" id="modal-close-btn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"/>
+              <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="item-form">
+            <input type="hidden" id="item-id">
+
+            <!-- Category Selection -->
+            <div class="form-group" id="category-group">
+              <label>Category</label>
+              <div class="category-selector">
+                <button type="button" class="cat-btn active" data-cat="password">🔑 Password</button>
+                <button type="button" class="cat-btn" data-cat="document">📄 Document</button>
+                <button type="button" class="cat-btn" data-cat="payslip">💰 Payslip</button>
+                <button type="button" class="cat-btn" data-cat="photo">📷 Photo</button>
+                <button type="button" class="cat-btn" data-cat="personal">📁 Personal</button>
+              </div>
+              <input type="hidden" id="item-category" value="password">
+            </div>
+
+            <!-- Name -->
+            <div class="form-group">
+              <label for="item-name">Name *</label>
+              <input type="text" id="item-name" required placeholder="e.g., Google Account">
+            </div>
+
+            <!-- Password Fields -->
+            <div id="password-fields">
+              <div class="form-group">
+                <label for="item-website">Website</label>
+                <input type="text" id="item-website" placeholder="e.g., https://google.com">
+              </div>
+              <div class="form-group">
+                <label for="item-username">Username / Email</label>
+                <input type="text" id="item-username" placeholder="e.g., john@example.com">
+              </div>
+              <div class="form-group">
+                <label for="item-password">Password</label>
+                <div class="password-input">
+                  <input type="password" id="item-password" placeholder="Enter password">
+                  <button type="button" class="toggle-password" id="toggle-password-btn">
+                    <svg id="eye-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                      <circle cx="12" cy="12" r="3"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- File Upload -->
+            <div id="file-fields" class="hidden">
+              <div class="form-group">
+                <label>File</label>
+                <div class="file-upload" id="file-drop-zone">
+                  <input type="file" id="item-file" accept=".pdf,.jpg,.jpeg,.png,.gif,.doc,.docx">
+                  <div class="file-upload-content">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                      <polyline points="17 8 12 3 7 8"/>
+                      <line x1="12" y1="3" x2="12" y2="15"/>
+                    </svg>
+                    <p>Drop file here or click to browse</p>
+                    <span class="file-hint">PDF, Images up to 10MB</span>
+                  </div>
+                  <div class="file-preview hidden" id="file-preview">
+                    <span class="file-name" id="preview-file-name"></span>
+                    <button type="button" class="remove-file" id="remove-file-btn">×</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Notes -->
+            <div class="form-group">
+              <label for="item-notes">Notes</label>
+              <textarea id="item-notes" rows="3" placeholder="Additional notes..."></textarea>
+            </div>
+
+            <!-- Tags -->
+            <div class="form-group">
+              <label for="item-tags">Tags</label>
+              <input type="text" id="item-tags" placeholder="Comma separated tags">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" id="cancel-btn">Cancel</button>
+          <button type="button" class="btn-primary" id="save-btn">Save</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- View Item Modal -->
+    <div id="view-modal" class="modal hidden">
+      <div class="modal-backdrop"></div>
+      <div class="modal-content modal-view">
+        <div class="modal-header">
+          <h2 id="view-title">Item Details</h2>
+          <div class="modal-actions">
+            <button class="btn-icon" id="edit-item-btn" title="Edit">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+              </svg>
+            </button>
+            <button class="btn-icon btn-danger" id="delete-item-btn" title="Delete">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="3 6 5 6 21 6"/>
+                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+              </svg>
+            </button>
+            <button class="modal-close" id="view-modal-close-btn">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div class="modal-body" id="view-content">
+          <!-- View content will be rendered here -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container"></div>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>
