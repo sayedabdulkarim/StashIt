@@ -37,7 +37,7 @@
     "service_worker": "background/service-worker.js"
   },
   "oauth2": {
-    "client_id": "686284037711-bb9hims44n0uka979i7ptgm1j6s6f4de.apps.googleusercontent.com",
+    "client_id": "69754542915-o1ai75tblhoq1v2h2vhm50br7kjs9vmo.apps.googleusercontent.com",
     "scopes": ["email", "profile"]
   }
 }
