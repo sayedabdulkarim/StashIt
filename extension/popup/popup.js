@@ -1,5 +1,5 @@
 // API Base URL
-const API_URL = 'http://localhost:3000/api';
+const API_URL = 'https://stashit-production.up.railway.app/api';
 
 // DOM Elements
 const loginScreen = document.getElementById('login-screen');

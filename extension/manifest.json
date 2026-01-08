@@ -10,10 +10,10 @@
     "alarms"
   ],
   "externally_connectable": {
-    "matches": ["http://localhost:3000/*"]
+    "matches": ["https://stashit-production.up.railway.app/*"]
   },
   "host_permissions": [
-    "http://localhost:3000/*",
+    "https://stashit-production.up.railway.app/*",
     "https://*.stashit.app/*",
     "https://www.googleapis.com/*"
   ],

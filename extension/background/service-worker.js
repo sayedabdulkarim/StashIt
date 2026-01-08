@@ -1,6 +1,6 @@
 // StashIt Background Service Worker
 
-const API_URL = 'http://localhost:3000/api';
+const API_URL = 'https://stashit-production.up.railway.app/api';
 
 // Listen for installation
 chrome.runtime.onInstalled.addListener(() => {

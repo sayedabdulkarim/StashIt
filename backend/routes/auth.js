@@ -5,10 +5,14 @@ const { OAuth2Client } = require('google-auth-library');
 const User = require('../models/User');
 const auth = require('../middleware/auth');
 
+const REDIRECT_URI = process.env.NODE_ENV === 'production'
+  ? 'https://stashit-production.up.railway.app/api/auth/google/callback'
+  : 'http://localhost:3000/api/auth/google/callback';
+
 const client = new OAuth2Client(
   process.env.GOOGLE_CLIENT_ID,
   process.env.GOOGLE_CLIENT_SECRET,
-  'http://localhost:3000/api/auth/google/callback'
+  REDIRECT_URI
 );
 
 // @route   GET /api/auth/google/login
