@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "StashIt",
   "version": "1.0.0",
-  "description": "Your personal secure vault for passwords, documents & more",
+  "description": "Securely store and access your private notes and credentials",
   "permissions": [
     "storage",
     "activeTab",
